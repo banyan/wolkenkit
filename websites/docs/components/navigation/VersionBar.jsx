@@ -25,7 +25,7 @@ class VersionBar extends React.PureComponent {
       <Link
         href={ `/${activePage.language}/${activePage.version}` }
       >
-        <Product name='wolkenkit' type='typo-only' size='lg' />
+        <Product name='wolkenkit' type='text-only' size='lg' />
       </Link>
     );
   }
