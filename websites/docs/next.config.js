@@ -10,6 +10,7 @@ const withMDX = require('@next/mdx')({
 });
 
 const config = {
+  exportTrailingSlash: true,
   pageExtensions: [ 'js', 'jsx', 'mdx' ]
 };
 
