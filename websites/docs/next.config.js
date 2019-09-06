@@ -2,7 +2,10 @@
 'use strict';
 /* eslint-enable strict */
 
-const slug = require('remark-slug');
+const processenv = require('processenv'),
+      slug = require('remark-slug');
+
+const isProduction = processenv('NODE_ENV') === 'production';
 
 const withMDX = require('@next/mdx')({
   extension: /\.mdx$/u,
@@ -12,7 +15,7 @@ const withMDX = require('@next/mdx')({
 });
 
 const config = {
-  exportTrailingSlash: true,
+  exportTrailingSlash: isProduction,
   pageExtensions: [ 'js', 'jsx', 'mdx' ]
 };
 
