@@ -1,18 +1,20 @@
-import { Hint } from '../../../../../../components';
+import { Code, Hint } from '../../../../../../components';
 
 # Connecting to an application
 
 To connect to an application, you need to use the wolkenkit SDK. As it is a universal module, it works in the browser as well as in Node.js.
 
-The wolkenkit SDK has been tested against Chrome <%= current.versions.chrome %>+, Firefox <%= current.versions.firefox %>+, Safari <%= current.versions.safari %>+, Microsoft Edge <%= current.versions.edge %>+, Internet Explorer <%= current.versions.ie %>, and Node.js <%= current.versions.node %>+. Other platforms may work as well, they have just not been tested.
+<p>
+  The wolkenkit SDK has been tested against Chrome <>{ props.versions.chrome }</>+, Firefox <>{ props.versions.firefox }</>+, Safari <>{ props.versions.safari }</>+, Microsoft Edge <>{ props.versions.edge }</>+, Internet Explorer <>{ props.versions.ie }</>+ and , Node.js <>{ props.versions.node }</>+. Other platforms may work as well, they have just not been tested.
+</p>
 
 ## Installing the SDK
 
 To install the wolkenkit SDK, use npm:
 
-```shell
-$ npm install wolkenkit-client@<%= current.versions.clientSdkJs %>
-```
+<Code langauge='shell'>{`
+  $ npm install wolkenkit-client@${props.versions.clientSdkJs}
+`}</Code>
 
 <Hint type='warning'>
 
