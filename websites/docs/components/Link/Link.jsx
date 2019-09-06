@@ -5,24 +5,26 @@ import { Link as StyledLink } from 'thenativeweb-ux';
 import { usePageContext } from '..';
 
 const CustomLink = ({ as, href, children, className }) => {
-  if (!href.startsWith('http') && !href.startsWith('https')) {
-    let absolutePath = href;
-
-    if (!href.startsWith('/')) {
-      const { activePage } = usePageContext();
-      const { language, version, section, chapter, page } = activePage;
-      const pagePath = `/${language}/${version}/${section}/${chapter}/${page}/`;
-
-      absolutePath = path.resolve(pagePath, href);
-    }
-
+  if (
+    href.startsWith('http:') ||
+    href.startsWith('https:') ||
+    href.startsWith('mailto:')
+  ) {
     return (
-      <Link href={ absolutePath } as={ as }><a className={ className }>{ children }</a></Link>
+      <StyledLink href={ href } className={ className } isExternal={ true }>{ children }</StyledLink>
     );
   }
 
+  let absolutePath = href;
+
+  const { activePage } = usePageContext();
+  const { language, version, section, chapter, page } = activePage;
+  const pagePath = `/${language}/${version}/${section}/${chapter}/${page}/`;
+
+  absolutePath = path.resolve(pagePath, href);
+
   return (
-    <StyledLink href={ href } className={ className } isExternal={ true }>{ children }</StyledLink>
+    <Link href={ absolutePath } as={ as }><a className={ className }>{ children }</a></Link>
   );
 };
 
