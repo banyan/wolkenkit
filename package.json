@@ -175,6 +175,7 @@
     "dir-compare": "1.7.3",
     "execa": "2.0.3",
     "get-option-tests": "1.1.1",
+    "headless-chrome-crawler": "1.8.0",
     "measure-time": "3.1.1",
     "next": "9.0.5",
     "nock": "10.0.6",
