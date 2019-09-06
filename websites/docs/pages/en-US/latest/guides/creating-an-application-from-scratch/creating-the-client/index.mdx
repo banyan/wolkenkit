@@ -12,11 +12,11 @@ You can use it inside the browser as well as on the server.
 ## Downloading the client blueprint
 
 To make things easy we have prepared a sample client for you that you are going
-toextend. <VersionedLink rewriteLatestAs='master' href='https://github.com/thenativeweb/wolkenkit-client-template-spa-vanilla-js/archive/#VERSION#.zip'>Download the client</VersionedLink> into
+to extend. <VersionedLink rewriteLatestAs='master' href='https://github.com/thenativeweb/wolkenkit-client-template-spa-vanilla-js/archive/#VERSION#.zip'>Download the client</VersionedLink> into
 your `chat` directory and, from within this directory, run the following commands:
 
 <Code language='shell'>{`
-  $ export CLIENT_TEMPLATE="wolkenkit-client-template-spa-vanilla-js-${ props.version === 'latest' ? 'master' : version }"
+  $ export CLIENT_TEMPLATE="wolkenkit-client-template-spa-vanilla-js-${ props.version === 'latest' ? 'master' : props.version }"
   $ unzip \${CLIENT_TEMPLATE}.zip
   $ rm \${CLIENT_TEMPLATE}.zip
   $ mv \${CLIENT_TEMPLATE} client
