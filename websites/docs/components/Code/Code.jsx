@@ -25,9 +25,13 @@ const styles = theme => ({
   }
 });
 
-const Code = ({ classes, children, language, className }) => {
+const Code = ({ classes, children, language, className, type }) => {
   if (typeof children !== 'string') {
     throw new Error('Children must be a string.');
+  }
+
+  if (type === 'inline') {
+    return <code>{ children }</code>;
   }
 
   let languageToHighlight = language;
@@ -50,6 +54,10 @@ const Code = ({ classes, children, language, className }) => {
       <SyntaxHighlighter PreTag={ preTag } language={ languageToHighlight } style={ highlightStyles }>{ stripIndent(children) }</SyntaxHighlighter>
     </span>
   );
+};
+
+Code.defaultProps = {
+  type: 'block'
 };
 
 export default withStyles(styles)(Code);
