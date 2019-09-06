@@ -5,11 +5,14 @@
 const path = require('path');
 
 const processenv = require('processenv'),
-      slug = require('remark-slug');
+      slug = require('remark-slug'),
+      stripIndent = require('common-tags/lib/stripIndent');
 
-const write = require('../shared/file/write');
+const configuration = require('./configuration'),
+      write = require('../shared/file/write');
 
-const isProduction = processenv('NODE_ENV') === 'production';
+const { baseUrl } = configuration,
+      isProduction = processenv('NODE_ENV') === 'production';
 
 const withMDX = require('@next/mdx')({
   extension: /\.mdx$/u,
@@ -22,13 +25,22 @@ const config = {
   exportTrailingSlash: isProduction,
   pageExtensions: [ 'js', 'jsx', 'mdx' ],
   async exportPathMap (defaultPathMap, { dev, outDir }) {
-    const sitemapFileName = path.join(outDir, 'sitemap.txt');
-
     if (!dev) {
-      const allPageUrls = Object.keys(defaultPathMap).
-        reduce((urls, relativeUrl) => `${urls}${relativeUrl}\n`, '');
+      const robotsPath = path.join(outDir, 'robots.txt'),
+            sitemapPath = path.join(outDir, 'sitemap.txt');
 
-      await write(sitemapFileName, allPageUrls);
+      const sitemapContent = Object.keys(defaultPathMap).
+        reduce((content, relativeUrl) => `${content}${baseUrl}${relativeUrl}\n`, '');
+
+      await write(sitemapPath, sitemapContent);
+
+      const robotsTxtContent = stripIndent`
+        User-agent: *
+        Allow: /
+
+        Sitemap: ${baseUrl}/sitemap.txt`;
+
+      await write(robotsPath, robotsTxtContent);
     }
 
     return defaultPathMap;
