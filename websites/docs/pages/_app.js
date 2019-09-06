@@ -1,9 +1,9 @@
+import App from 'next/app';
 import Documentation from '../layouts/Documentation';
 import { MDXProvider } from '@mdx-js/react';
 import React from 'react';
 import theme from '../theme/docs';
 import { ActivePage, metadata } from '../content';
-import App, { Container } from 'next/app';
 import { Blockquote, Code, Headline, Link, PageContextProvider } from '../components';
 import { removeServerSideStyles, ThemeProvider } from 'thenativeweb-ux';
 
@@ -63,20 +63,18 @@ class CustomApp extends App {
     const { language, version, versions } = activePage;
 
     return (
-      <Container>
-        <ThemeProvider theme={ theme }>
-          <MDXProvider components={ mdxComponents }>
-            <PageContextProvider context={{ activePage, metadata }}>
-              <Component
-                { ...pageProps }
-                language={ language }
-                version={ version }
-                versions={ versions }
-              />
-            </PageContextProvider>
-          </MDXProvider>
-        </ThemeProvider>
-      </Container>
+      <ThemeProvider theme={ theme }>
+        <MDXProvider components={ mdxComponents }>
+          <PageContextProvider context={{ activePage, metadata }}>
+            <Component
+              { ...pageProps }
+              language={ language }
+              version={ version }
+              versions={ versions }
+            />
+          </PageContextProvider>
+        </MDXProvider>
+      </ThemeProvider>
     );
   }
 }

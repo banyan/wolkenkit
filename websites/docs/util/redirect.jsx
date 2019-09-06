@@ -1,7 +1,5 @@
-'use strict';
-
-const Head = require('next/head').default,
-      React = require('react');
+import Head from 'next/head';
+import React from 'react';
 
 const redirect = destination => {
   if (!destination) {
@@ -32,4 +30,4 @@ const redirect = destination => {
   return RedirectComponent;
 };
 
-module.exports = redirect;
+export default redirect;
