@@ -17,6 +17,10 @@ const collectBreadcrumbs = function ({ language, children, path, into } = {}) {
 
   const item = children.find(child => child.slug === path[0]);
 
+  if (!item) {
+    return;
+  }
+
   into.push(item.title);
 
   if (!item.children || path.length === 1) {
