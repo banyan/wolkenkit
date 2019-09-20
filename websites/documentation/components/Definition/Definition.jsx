@@ -1,7 +1,7 @@
-import { Headline } from '..';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { classNames, withStyles } from 'thenativeweb-ux';
+import { Headline, StaticImage } from '..';
 
 const styles = theme => ({
   Definition: {
@@ -62,12 +62,11 @@ const styles = theme => ({
 
 const Definition = React.memo(({ classes, className, children, src, title } = {}) => {
   const componentClasses = classNames(classes.Definition, className);
-  const completeSrc = `/static/definitions/${src}`;
 
   return (
     <div className={ componentClasses }>
       <div className={ classes.Icon }>
-        <img alt={ title } src={ completeSrc } />
+        <StaticImage alt={ title } src={ src } />
       </div>
       <dl className={ classes.Body }>
         <dt><Headline level='2' className={ classes.Title }>{ title }</Headline></dt>
