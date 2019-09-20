@@ -2,14 +2,14 @@
 'use strict';
 /* eslint-enable strict */
 
-const path = require('path');
+const fs = require('fs').promises,
+      path = require('path');
 
 const processenv = require('processenv'),
       slug = require('remark-slug'),
       stripIndent = require('common-tags/lib/stripIndent');
 
-const configuration = require('./configuration'),
-      write = require('../shared/file/write');
+const configuration = require('./configuration');
 
 const { baseUrl } = configuration,
       isProduction = processenv('NODE_ENV') === 'production';
@@ -32,7 +32,7 @@ const config = {
       const sitemapContent = Object.keys(defaultPathMap).
         reduce((content, relativeUrl) => `${content}${baseUrl}${relativeUrl}\n`, '');
 
-      await write(sitemapPath, sitemapContent);
+      await fs.writeFile(sitemapPath, sitemapContent, { encoding: 'utf8' });
 
       const robotsTxtContent = stripIndent`
         User-agent: *
@@ -40,7 +40,7 @@ const config = {
 
         Sitemap: ${baseUrl}/sitemap.txt`;
 
-      await write(robotsPath, robotsTxtContent);
+      await fs.writeFile(robotsPath, robotsTxtContent, { encoding: 'utf8' });
     }
 
     return defaultPathMap;
