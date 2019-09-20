@@ -135,5 +135,4 @@ const collectPageUrls = function ({ page }) {
 
     buntstift.exit(1);
   }
-
 })();
