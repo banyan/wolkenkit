@@ -1,3 +1,3 @@
-import redirect from '../util/redirect';
+import redirect from '../components/redirect';
 
 export default redirect('/en-US/latest');

@@ -1,4 +1,4 @@
-import slugify from '../../util/slugify';
+import slugify from '../../services/slugify';
 
 const slugifyNavigationItems = function (items) {
   if (!Array.isArray(items)) {

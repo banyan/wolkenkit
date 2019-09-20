@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Search from './Search.jsx';
 import VersionBar from './VersionBar.jsx';
-import { ActivePage, Metadata } from '../../content';
+import { ActivePage, Metadata } from '../../services';
 import { Brand, Icon, Link, withStyles } from 'thenativeweb-ux';
 
 const styles = theme => ({

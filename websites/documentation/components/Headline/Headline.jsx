@@ -1,5 +1,5 @@
 import React from 'react';
-import slugify from '../../util/slugify';
+import slugify from '../../services/slugify';
 import { classNames, withStyles } from 'thenativeweb-ux';
 
 const styles = theme => ({

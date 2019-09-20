@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import SearchResults from './SearchResults.jsx';
 import { withStyles } from 'thenativeweb-ux';
-import { ActivePage, search } from '../../content';
+import { ActivePage, search } from '../../services';
 
 const styles = theme => ({
   Search: {

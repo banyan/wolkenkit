@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { ActivePage, Metadata } from '../content';
+import { ActivePage, Metadata } from '../services';
 import { classNames, Website, withStyles } from 'thenativeweb-ux';
 import { Head, Icons, Navigation } from '../components';
 

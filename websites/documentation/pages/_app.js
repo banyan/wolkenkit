@@ -3,7 +3,7 @@ import Documentation from '../layouts/Documentation';
 import { MDXProvider } from '@mdx-js/react';
 import React from 'react';
 import theme from '../theme/docs';
-import { ActivePage, metadata } from '../content';
+import { ActivePage, metadata } from '../services';
 import { Blockquote, Code, Headline, Link, PageContextProvider } from '../components';
 import { removeServerSideStyles, ThemeProvider } from 'thenativeweb-ux';
 

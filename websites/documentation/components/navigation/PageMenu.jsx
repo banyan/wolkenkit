@@ -3,7 +3,7 @@ import Page from './Page.jsx';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Section from './Section.jsx';
-import { ActivePage, Metadata } from '../../content';
+import { ActivePage, Metadata } from '../../services';
 import { classNames, withStyles } from 'thenativeweb-ux';
 
 const styles = theme => ({

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Router from 'next/router';
-import { ActivePage, Metadata } from '../../content';
+import { ActivePage, Metadata } from '../../services';
 import { Bar, Link } from '..';
 import { Dropdown, Product } from 'thenativeweb-ux';
 
