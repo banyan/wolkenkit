@@ -5,7 +5,7 @@
 const fs = require('fs').promises,
       path = require('path');
 
-const processenv = require('processenv'),
+const processenv = require('processenv').default,
       slug = require('remark-slug'),
       stripIndent = require('common-tags/lib/stripIndent');
 
