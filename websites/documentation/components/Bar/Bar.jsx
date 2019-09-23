@@ -42,11 +42,15 @@ const styles = theme => ({
 });
 
 const Bar = ({ children, classes, className, style, variant, justifyContent }) => {
-  const componentClasses = classNames(classes.Bar, {
-    [classes.JustifyContentCenter]: justifyContent === 'center',
-    [classes.JustifyContentSpaceBetween]: justifyContent === 'space-between',
-    [classes.VariantBottom]: variant === 'bottom'
-  }, className);
+  const componentClasses = classNames(
+    classes.Bar,
+    {
+      [classes.JustifyContentCenter]: justifyContent === 'center',
+      [classes.JustifyContentSpaceBetween]: justifyContent === 'space-between',
+      [classes.VariantBottom]: variant === 'bottom'
+    },
+    className
+  );
 
   return (
     <div className={ componentClasses } style={ style }>

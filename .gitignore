@@ -1,6 +1,5 @@
 # Node.js folders
-*coverage/
-*node_modules/
+node_modules/
 
 # Build artefacts
 *build/
@@ -10,7 +9,7 @@
 .DS_Store
 npm-debug.log
 
-# terraform
+# Terraform
 .terraform/
 terraform.tfstate
 terraform.tfstate.backup

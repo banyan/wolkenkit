@@ -101,13 +101,17 @@ const styles = theme => ({
 });
 
 const Hint = ({ children, classes, className = '', style, type }) => {
-  const componentClasses = classNames(classes.Hint, {
-    [classes.TypeCongrats]: type === 'congrats',
-    [classes.TypeQuestion]: type === 'question',
-    [classes.TypeTip]: type === 'tip',
-    [classes.TypeWarning]: type === 'warning',
-    [classes.TypeWisdom]: type === 'wisdom'
-  }, className);
+  const componentClasses = classNames(
+    classes.Hint,
+    {
+      [classes.TypeCongrats]: type === 'congrats',
+      [classes.TypeQuestion]: type === 'question',
+      [classes.TypeTip]: type === 'tip',
+      [classes.TypeWarning]: type === 'warning',
+      [classes.TypeWisdom]: type === 'wisdom'
+    },
+    className
+  );
 
   return (
     <div className={ componentClasses } style={ style }>
