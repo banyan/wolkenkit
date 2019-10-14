@@ -12,7 +12,7 @@ suite('health/Http', (): void => {
 
   suite('initialize', (): void => {
     test('sets api to an Express application.', async (): Promise<void> => {
-      const http = await Http.initialize({ corsOrigin: '*', processId });
+      const http = await Http.create({ corsOrigin: '*', processId });
 
       assert.that(http.api).is.ofType('function');
     });
@@ -35,7 +35,7 @@ suite('health/Http', (): void => {
       {
         title: 'returns origin if origin is allowed by a regular expression.',
         origin: 'http://www.thenativeweb.io',
-        allow: /\.thenativeweb\.io$/u,
+        allow: [ /\.thenativeweb\.io$/u ],
         expected: 'http://www.thenativeweb.io'
       },
       {
@@ -53,7 +53,7 @@ suite('health/Http', (): void => {
       {
         title: 'returns undefined if origin is not allowed by a regular expression.',
         origin: 'http://www.example.com',
-        allow: /\.thenativeweb\.io$/u,
+        allow: [ /\.thenativeweb\.io$/u ],
         expected: undefined
       }
     ];
@@ -61,7 +61,7 @@ suite('health/Http', (): void => {
     for (const corsOrigin of corsOrigins) {
       /* eslint-disable no-loop-func */
       test(corsOrigin.title, async (): Promise<void> => {
-        const http = await Http.initialize({ corsOrigin: corsOrigin.allow, processId });
+        const http = await Http.create({ corsOrigin: corsOrigin.allow, processId });
 
         await supertest(http.api).
           options('/').
@@ -84,7 +84,7 @@ suite('health/Http', (): void => {
     let http: Http;
 
     setup(async (): Promise<void> => {
-      http = await Http.initialize({ corsOrigin: '*', processId });
+      http = await Http.create({ corsOrigin: '*', processId });
     });
 
     test('returns 200.', async (): Promise<void> => {

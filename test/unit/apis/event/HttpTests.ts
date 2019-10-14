@@ -8,7 +8,7 @@ import eventMap from '../../../shared/applications/valid/eventMap';
 import { Eventstore } from '../../../../src/stores/eventstore/Eventstore';
 import Http from '../../../../src/apis/event/Http';
 import identityProvider from '../../../shared/identityProvider';
-import InMemoryEventstore from '../../../../src/stores/eventstore/InMemory/InMemoryEventStore';
+import InMemoryEventstore from '../../../../src/stores/eventstore/InMemory/InMemoryEventstore';
 import path from 'path';
 import record from 'record-stdstreams';
 import Repository from '../../../../src/common/domain/Repository';
@@ -25,8 +25,7 @@ suite('event/Http', (): void => {
   setup(async (): Promise<void> => {
     const directory = path.join(__dirname, '..', '..', '..', 'shared', 'applications', 'base');
 
-    eventstore = new InMemoryEventstore();
-    await eventstore.initialize();
+    eventstore = await InMemoryEventstore.create();
 
     application = await Application.load({ directory });
     repository = new Repository({ application, eventstore });
@@ -42,7 +41,7 @@ suite('event/Http', (): void => {
 
   suite('initialize', (): void => {
     test('sets api to an Express application.', async (): Promise<void> => {
-      const http = await Http.initialize({
+      const http = await Http.create({
         corsOrigin: '*',
         purpose: 'external',
         async onReceiveEvent (): Promise<void> {
@@ -100,7 +99,7 @@ suite('event/Http', (): void => {
     for (const corsOrigin of corsOrigins) {
       /* eslint-disable no-loop-func */
       test(corsOrigin.title, async (): Promise<void> => {
-        const http = await Http.initialize({
+        const http = await Http.create({
           corsOrigin: corsOrigin.allow,
           purpose: 'external',
           async onReceiveEvent (): Promise<void> {
@@ -133,7 +132,7 @@ suite('event/Http', (): void => {
       let http: Http;
 
       setup(async (): Promise<void> => {
-        http = await Http.initialize({
+        http = await Http.create({
           corsOrigin: '*',
           purpose: 'external',
           async onReceiveEvent (): Promise<void> {
@@ -181,7 +180,7 @@ suite('event/Http', (): void => {
       let http: Http;
 
       setup(async (): Promise<void> => {
-        http = await Http.initialize({
+        http = await Http.create({
           corsOrigin: '*',
           purpose: 'external',
           async onReceiveEvent (): Promise<void> {
@@ -455,7 +454,7 @@ suite('event/Http', (): void => {
           application = await Application.load({ directory });
           repository = new Repository({ application, eventstore });
 
-          http = await Http.initialize({
+          http = await Http.create({
             corsOrigin: '*',
             purpose: 'external',
             async onReceiveEvent (): Promise<void> {
@@ -518,7 +517,7 @@ suite('event/Http', (): void => {
           application = await Application.load({ directory });
           repository = new Repository({ application, eventstore });
 
-          http = await Http.initialize({
+          http = await Http.create({
             corsOrigin: '*',
             purpose: 'external',
             async onReceiveEvent (): Promise<void> {
@@ -581,7 +580,7 @@ suite('event/Http', (): void => {
           application = await Application.load({ directory });
           repository = new Repository({ application, eventstore });
 
-          http = await Http.initialize({
+          http = await Http.create({
             corsOrigin: '*',
             purpose: 'external',
             async onReceiveEvent (): Promise<void> {
@@ -633,7 +632,7 @@ suite('event/Http', (): void => {
 
           application = await Application.load({ directory });
           repository = new Repository({ application, eventstore });
-          http = await Http.initialize({
+          http = await Http.create({
             corsOrigin: '*',
             purpose: 'external',
             async onReceiveEvent (): Promise<void> {
@@ -722,7 +721,7 @@ suite('event/Http', (): void => {
           application = await Application.load({ directory });
           repository = new Repository({ application, eventstore });
 
-          http = await Http.initialize({
+          http = await Http.create({
             corsOrigin: '*',
             purpose: 'external',
             async onReceiveEvent (): Promise<void> {
@@ -790,7 +789,7 @@ suite('event/Http', (): void => {
             application = await Application.load({ directory });
             repository = new Repository({ application, eventstore });
 
-            http = await Http.initialize({
+            http = await Http.create({
               corsOrigin: '*',
               purpose: 'external',
               async onReceiveEvent (): Promise<void> {
@@ -855,7 +854,7 @@ suite('event/Http', (): void => {
           application = await Application.load({ directory });
           repository = new Repository({ application, eventstore });
 
-          http = await Http.initialize({
+          http = await Http.create({
             corsOrigin: '*',
             purpose: 'external',
             async onReceiveEvent (): Promise<void> {
@@ -918,7 +917,7 @@ suite('event/Http', (): void => {
           application = await Application.load({ directory });
           repository = new Repository({ application, eventstore });
 
-          http = await Http.initialize({
+          http = await Http.create({
             corsOrigin: '*',
             purpose: 'external',
             async onReceiveEvent (): Promise<void> {
@@ -981,7 +980,7 @@ suite('event/Http', (): void => {
           application = await Application.load({ directory });
           repository = new Repository({ application, eventstore });
 
-          http = await Http.initialize({
+          http = await Http.create({
             corsOrigin: '*',
             purpose: 'external',
             async onReceiveEvent (): Promise<void> {
@@ -1034,7 +1033,7 @@ suite('event/Http', (): void => {
           application = await Application.load({ directory });
           repository = new Repository({ application, eventstore });
 
-          http = await Http.initialize({
+          http = await Http.create({
             corsOrigin: '*',
             purpose: 'external',
             async onReceiveEvent (): Promise<void> {
@@ -1123,7 +1122,7 @@ suite('event/Http', (): void => {
           application = await Application.load({ directory });
           repository = new Repository({ application, eventstore });
 
-          http = await Http.initialize({
+          http = await Http.create({
             corsOrigin: '*',
             purpose: 'external',
             async onReceiveEvent (): Promise<void> {
@@ -1191,7 +1190,7 @@ suite('event/Http', (): void => {
             application = await Application.load({ directory });
             repository = new Repository({ application, eventstore });
 
-            http = await Http.initialize({
+            http = await Http.create({
               corsOrigin: '*',
               purpose: 'external',
               async onReceiveEvent (): Promise<void> {
@@ -1256,7 +1255,7 @@ suite('event/Http', (): void => {
           application = await Application.load({ directory });
           repository = new Repository({ application, eventstore });
 
-          http = await Http.initialize({
+          http = await Http.create({
             corsOrigin: '*',
             purpose: 'external',
             async onReceiveEvent (): Promise<void> {
@@ -1308,7 +1307,7 @@ suite('event/Http', (): void => {
           application = await Application.load({ directory });
           repository = new Repository({ application, eventstore });
 
-          http = await Http.initialize({
+          http = await Http.create({
             corsOrigin: '*',
             purpose: 'external',
             async onReceiveEvent (): Promise<void> {
@@ -1371,7 +1370,7 @@ suite('event/Http', (): void => {
           application = await Application.load({ directory });
           repository = new Repository({ application, eventstore });
 
-          http = await Http.initialize({
+          http = await Http.create({
             corsOrigin: '*',
             purpose: 'external',
             async onReceiveEvent (): Promise<void> {
@@ -1434,7 +1433,7 @@ suite('event/Http', (): void => {
           application = await Application.load({ directory });
           repository = new Repository({ application, eventstore });
 
-          http = await Http.initialize({
+          http = await Http.create({
             corsOrigin: '*',
             purpose: 'external',
             async onReceiveEvent (): Promise<void> {
@@ -1487,7 +1486,7 @@ suite('event/Http', (): void => {
           application = await Application.load({ directory });
           repository = new Repository({ application, eventstore });
 
-          http = await Http.initialize({
+          http = await Http.create({
             corsOrigin: '*',
             purpose: 'external',
             async onReceiveEvent (): Promise<void> {
@@ -1576,7 +1575,7 @@ suite('event/Http', (): void => {
           application = await Application.load({ directory });
           repository = new Repository({ application, eventstore });
 
-          http = await Http.initialize({
+          http = await Http.create({
             corsOrigin: '*',
             purpose: 'external',
             async onReceiveEvent (): Promise<void> {
@@ -1644,7 +1643,7 @@ suite('event/Http', (): void => {
             application = await Application.load({ directory });
             repository = new Repository({ application, eventstore });
 
-            http = await Http.initialize({
+            http = await Http.create({
               corsOrigin: '*',
               purpose: 'external',
               async onReceiveEvent (): Promise<void> {
@@ -1707,7 +1706,7 @@ suite('event/Http', (): void => {
       let http: Http;
 
       setup(async (): Promise<void> => {
-        http = await Http.initialize({
+        http = await Http.create({
           corsOrigin: '*',
           purpose: 'external',
           async onReceiveEvent (): Promise<void> {
@@ -1732,7 +1731,7 @@ suite('event/Http', (): void => {
       let http: Http;
 
       setup(async (): Promise<void> => {
-        http = await Http.initialize({
+        http = await Http.create({
           corsOrigin: '*',
           purpose: 'internal',
           onReceiveEvent (): void {
@@ -1757,7 +1756,7 @@ suite('event/Http', (): void => {
       let http: Http;
 
       setup(async (): Promise<void> => {
-        http = await Http.initialize({
+        http = await Http.create({
           corsOrigin: '*',
           purpose: 'internal',
           onReceiveEvent (): void {
@@ -1784,7 +1783,7 @@ suite('event/Http', (): void => {
 
       setup(async (): Promise<void> => {
         receivedEvents = [];
-        http = await Http.initialize({
+        http = await Http.create({
           corsOrigin: '*',
           purpose: 'internal',
           onReceiveEvent ({ event }: {
@@ -1961,7 +1960,7 @@ suite('event/Http', (): void => {
       });
 
       test('returns 500 if on received event throws an error.', async (): Promise<void> => {
-        http = await Http.initialize({
+        http = await Http.create({
           corsOrigin: '*',
           purpose: 'internal',
           async onReceiveEvent (): Promise<void> {

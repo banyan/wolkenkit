@@ -20,8 +20,7 @@ suite('command/Http', (): void => {
 
     application = await Application.load({ directory });
 
-    eventstore = new InMemoryEventstore();
-    await eventstore.initialize();
+    eventstore = await InMemoryEventstore.create();
   });
 
   teardown(async (): Promise<void> => {
@@ -34,7 +33,7 @@ suite('command/Http', (): void => {
 
   suite('initialize', (): void => {
     test('sets api to an Express application.', async (): Promise<void> => {
-      const http = await Http.initialize({
+      const http = await Http.create({
         corsOrigin: '*',
         purpose: 'external',
         async onReceiveCommand (): Promise<void> {
@@ -65,7 +64,7 @@ suite('command/Http', (): void => {
       {
         title: 'returns origin if origin is allowed by a regular expression.',
         origin: 'http://www.thenativeweb.io',
-        allow: /\.thenativeweb\.io$/u,
+        allow: [ /\.thenativeweb\.io$/u ],
         expected: 'http://www.thenativeweb.io'
       },
       {
@@ -83,7 +82,7 @@ suite('command/Http', (): void => {
       {
         title: 'returns undefined if origin is not allowed by a regular expression.',
         origin: 'http://www.example.com',
-        allow: /\.thenativeweb\.io$/u,
+        allow: [ /\.thenativeweb\.io$/u ],
         expected: undefined
       }
     ];
@@ -91,7 +90,7 @@ suite('command/Http', (): void => {
     for (const corsOrigin of corsOrigins) {
       /* eslint-disable no-loop-func */
       test(corsOrigin.title, async (): Promise<void> => {
-        const http = await Http.initialize({
+        const http = await Http.create({
           corsOrigin: corsOrigin.allow,
           purpose: 'external',
           async onReceiveCommand (): Promise<void> {
@@ -122,7 +121,7 @@ suite('command/Http', (): void => {
     let http: Http;
 
     setup(async (): Promise<void> => {
-      http = await Http.initialize({
+      http = await Http.create({
         corsOrigin: '*',
         purpose: 'external',
         async onReceiveCommand (): Promise<void> {
@@ -173,7 +172,7 @@ suite('command/Http', (): void => {
       setup(async (): Promise<void> => {
         receivedCommands = [];
 
-        http = await Http.initialize({
+        http = await Http.create({
           corsOrigin: '*',
           purpose: 'external',
           async onReceiveCommand ({ command }: { command: CommandInternal}): Promise<void> {
@@ -338,7 +337,7 @@ suite('command/Http', (): void => {
       });
 
       test('returns 500 if on received command throws an error.', async (): Promise<void> => {
-        http = await Http.initialize({
+        http = await Http.create({
           corsOrigin: '*',
           purpose: 'external',
           async onReceiveCommand (): Promise<void> {
@@ -371,7 +370,7 @@ suite('command/Http', (): void => {
       setup(async (): Promise<void> => {
         receivedCommands = [];
 
-        http = await Http.initialize({
+        http = await Http.create({
           corsOrigin: '*',
           purpose: 'internal',
           async onReceiveCommand ({ command }: { command: CommandInternal}): Promise<void> {
@@ -574,7 +573,7 @@ suite('command/Http', (): void => {
       });
 
       test('returns 500 if on received command throws an error.', async (): Promise<void> => {
-        http = await Http.initialize({
+        http = await Http.create({
           corsOrigin: '*',
           purpose: 'internal',
           async onReceiveCommand (): Promise<void> {

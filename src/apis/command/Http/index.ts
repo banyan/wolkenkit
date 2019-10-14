@@ -22,14 +22,14 @@ class Http {
     this.api = api;
   }
 
-  public static async initialize ({
+  public static async create ({
     corsOrigin,
     purpose,
     onReceiveCommand,
     application,
     identityProviders
   }: {
-    corsOrigin: string | string[] | RegExp;
+    corsOrigin: string | (string | RegExp)[];
     purpose: Purpose;
     onReceiveCommand: ({ command }: {command: CommandInternal}) => Promise<void>;
     application: Application;

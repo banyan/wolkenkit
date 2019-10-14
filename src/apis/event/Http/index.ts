@@ -1,6 +1,7 @@
 import Application from '../../../common/application';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import errors from '../../../common/errors';
 import EventInternal from '../../../common/elements/EventInternal';
 import express from 'express';
 import { Express } from 'express-serve-static-core';
@@ -28,7 +29,7 @@ class Http {
     this.api = api;
   }
 
-  public static async initialize ({
+  public static async create ({
     corsOrigin,
     purpose,
     onReceiveEvent,
@@ -87,7 +88,7 @@ class Http {
     event: EventInternal;
   }): Promise<void> {
     if (this.purpose !== 'external') {
-      throw new Error('Invalid operation.');
+      throw new errors.InvalidOperation();
     }
 
     await this.v2.sendEvent({ event });
